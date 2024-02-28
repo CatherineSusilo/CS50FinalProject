@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block main %}
+    <h1>Welcome to the Dashboard</h1>
+    {% if session["user_type"] == "customer" %}
+        <h2>Play Summary</h2>
+        <h3>Title: Entranced by BSS</h3>
+        <h3>Location: Teater Jakarta TIM</h3>
+        <h3>About: To be determined</h3>
+        <h3>Characters: To be determined</h3>
+        <h3>Steps to Purchase Ticket: To be determined</h3>
+    {% endif %}
+{% endblock %}

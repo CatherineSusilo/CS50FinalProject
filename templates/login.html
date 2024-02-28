@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <h1>Login</h1>
+    <p>Don't have an account? <a href="/register">Register here (for customers)</a>.</p>
+    <form action="/login" method="post">
+        <label for="userid">User ID:</label><br>
+        <input type="text" id="userid" name="userid" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Login</button>
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+{% endblock %}
+
