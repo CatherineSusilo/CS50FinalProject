@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}User List{% endblock %}
+
+{% block main %}
+    <h1>User List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Tickets Bought</th>
+                <th>Position</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Checked In</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.username }}</td>
+                <td>{{ row.tickets_bought }}</td>
+                <td>{{ row.position }}</td>
+                <td>{{ row.email }}</td>
+                <td>{{ row.phoneNo }}</td>
+                <td>{{ row.checkedIn }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

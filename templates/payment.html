@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Payment{% endblock %}
+
+{% block main %}
+    <h1>Payment</h1>
+    <p>Please complete your payment to confirm the booking.</p>
+    <p>Name: {{ first_name }}</p>
+
+    <p>Selected Ticket Category: {{ ticket_category }}</p>
+    <p>Selected Showing: {{ showing }}</p>
+    <p>Amount of Tickets: {{ ticket_amount }}</p>
+    <p>Price: Rp. {{ (price*ticket_amount) }}</p>
+
+    </p>
+    <form action="/payment" method="post">
+        <!-- Add payment form fields here -->
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+{% endblock %}

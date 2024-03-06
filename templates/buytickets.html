@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block title %}Buy Tickets{% endblock %}
+
+{% block main %}
+    <h1>Buy Tickets</h1>
+    <table class="tableSeats">
+        <tbody>
+            <!-- Rows A-C -->
+            <tr class="yellow-row">
+                <td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td>
+            </tr>
+            <tr class="yellow-row">
+                <td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td>
+            </tr>
+            <tr class="yellow-row">
+                <td>C1</td><td>C2</td><td>C3</td><td>C4</td><td>C5</td><td>C6</td><td>C7</td><td>C8</td><td>C9</td><td>C10</td>
+            </tr>
+            <!-- Rows D-F -->
+            <tr class="green-row">
+                <td>D1</td><td>D2</td><td>D3</td><td>D4</td><td>D5</td><td>D6</td><td>D7</td><td>D8</td><td>D9</td><td>D10</td>
+            </tr>
+            <tr class="green-row">
+                <td>E1</td><td>E2</td><td>E3</td><td>E4</td><td>E5</td><td>E6</td><td>E7</td><td>E8</td><td>E9</td><td>E10</td>
+            </tr>
+            <tr class="green-row">
+                <td>F1</td><td>F2</td><td>F3</td><td>F4</td><td>F5</td><td>F6</td><td>F7</td><td>F8</td><td>F9</td><td>F10</td>
+            </tr>
+            <!-- Rows G-H -->
+            <tr class="red-row">
+                <td>G1</td><td>G2</td><td>G3</td><td>G4</td><td>G5</td><td>G6</td><td>G7</td><td>G8</td><td>G9</td><td>G10</td>
+            </tr>
+            <tr class="red-row">
+                <td>H1</td><td>H2</td><td>H3</td><td>H4</td><td>H5</td><td>H6</td><td>H7</td><td>H8</td><td>H9</td><td>H10</td>
+            </tr>
+            <!-- Row I -->
+            <tr class="blue-row">
+                <td>I1</td><td>I2</td><td>I3</td><td>I4</td><td>I5</td><td>I6</td><td>I7</td><td>I8</td><td>I9</td><td>I10</td>
+            </tr>
+            <!-- Row J -->
+            <tr class="purple-row">
+                <td>J1</td><td>J2</td><td>J3</td><td>J4</td><td>J5</td><td class="gray-cell">J6</td><td class="gray-cell">J7</td><td class="gray-cell">J8</td><td class="brown-cell">J9</td><td class="brown-cell">J10</td>
+            </tr>
+            <!-- Stage -->
+            <tr class="space-row">
+                <td colspan="10"></td>
+            </tr>
+            <tr class="stage-row">
+                <td colspan="10" class="space-cell">Stage</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="summary">
+        <h2>Price Summary:</h2>
+        <p>Matinee:</p>
+        <ul>
+            <li>CAT 5 - Purple - 325,000.00</li>
+            <li>CAT 4 - Blue - 275,000.00</li>
+            <li>CAT 3 - Red - 225,000.00</li>
+            <li>CAT 2 - Green - 175,000.00</li>
+            <li>CAT 1 - Yellow - 125,000.00</li>
+        </ul>
+        <p>Gala:</p>
+        <ul>
+            <li>CAT 5 - Purple - 350,000.00</li>
+            <li>CAT 4 - Blue - 300,000.00</li>
+            <li>CAT 3 - Red - 250,000.00</li>
+            <li>CAT 2 - Green - 200,000.00</li>
+            <li>CAT 1 - Yellow - 150,000.00</li>
+        </ul>
+    </div>
+    <p>Please fill out the following details to purchase tickets:</p>
+    <form action="/payment" method="post">
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="ticket_amount">Amount of Tickets:</label>
+            <input type="number" id="ticket_amount" name="ticket_amount" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+            <label for="showing">Showing:</label>
+            <select id="showing" name="showing" class="form-control" required>
+                <option value="matinee">Matinee</option>
+                <option value="gala">Gala</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ticket_category">Ticket Category:</label>
+            <select id="ticket_category" name="ticket_category" class="form-control" required>
+                <option value="CAT1">CAT 1</option>
+                <option value="CAT2">CAT 2</option>
+                <option value="CAT3">CAT 3</option>
+                <option value="CAT4">CAT 4</option>
+                <option value="CAT5">CAT 5</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </form>
+{% endblock %}
