@@ -18,17 +18,18 @@ db = SQL("sqlite:///ticketing.db")
 
 # Buying tickets dictionary
 
-ticketDetails = {
-    "first_name": " ",
-    "last_name": " ",
-    "email": " ",
-    "phone_number": " ",
-    "birthday": " ",
-    "ticket_amount": "",
-    "ticket_category": " ",
-    "showing": " "
+db.execute('''CREATE TABLE IF NOT EXISTS ticketDetails (
+                id INTEGER PRIMARY KEY,
+                first_name TEXT,
+                last_name TEXT,
+                email TEXT,
+                phone_number TEXT,
+                birthday TEXT,
+                ticket_amount INTEGER,
+                ticket_category TEXT,
+                showing TEXT
+            )''')
 
-}
 
 @app.after_request
 def after_request(response):
@@ -162,26 +163,11 @@ def logout():
     return redirect("/")
 
 
-def storeDetails(ticket_details):
-    db.execute('''INSERT INTO ticketDetails (first_name, last_name, email, phone_number, birthday, ticket_amount, ticket_category, showing)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-                (ticket_details["first_name"], ticket_details["last_name"], ticket_details["email"],
-                 ticket_details["phone_number"], ticket_details["birthday"], ticket_details["ticket_amount"],
-                 ticket_details["ticket_category"], ticket_details["showing"]))
 
-def retrieveDetails():
-    row = db.execute("SELECT * FROM ticketDetails ORDER BY id DESC LIMIT 1")
+def retrieveDetails(detail_name):
+    row = db.execute(f"SELECT {detail_name} FROM ticketDetails ORDER BY id DESC LIMIT 1")
     if row:
-        return {
-            "first_name": row[1],
-            "last_name": row[2],
-            "email": row[3],
-            "phone_number": row[4],
-            "birthday": row[5],
-            "ticket_amount": row[6],
-            "ticket_category": row[7],
-            "showing": row[8]
-        }
+        return row[0]
     else:
         return None
 
@@ -207,15 +193,11 @@ def buy_tickets():
         elif not request.form.get('showing'):
             return apology("must provide showing", 400)
         # ticket_amount = int(request.form['ticket_amount'])
-        ticketDetails['first_name'] = request.form.get("first_name")
-        ticketDetails['last_name'] = request.form.get("last_name")
-        ticketDetails['email'] = request.form.get("email")
-        ticketDetails['phone_number'] = request.form.get("phone_number")
-        ticketDetails['birthday'] = request.form.get("birthday")
-        ticketDetails['ticket_amount'] = int(request.form['ticket_amount'])
-        ticketDetails['ticket_category'] = request.form.get('ticket_category')
-        ticketDetails['showing'] = request.form.get('showing')
-        storeDetails(ticketDetails)
+        db.execute('''INSERT INTO ticketDetails (first_name, last_name, email, phone_number, birthday, ticket_amount, ticket_category, showing)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                (request.form.get("first_name"), request.form.get("last_name"), request.form.get("email"),
+                 request.form.get("phone_number"), request.form.get("birthday"), int(request.form['ticket_amount']),
+                 request.form.get('ticket_category'), request.form.get('showing')))
 
         # Redirect to the seat selection page
         return redirect('/payment')
@@ -227,9 +209,9 @@ def buy_tickets():
 def payment():
     if request.method == 'POST':
         return redirect('/payment')
-    ticket_category = ticketDetails['ticket_category']
-    showing = ticketDetails['showing']
-    ticket_amount = ticketDetails['ticket_amount']
+    ticket_category = retrieveDetails('ticket_category')
+    showing = retrieveDetails('showing')
+    ticket_amount = retrieveDetails('ticket_amount')
 
     # if request.method == 'POST':
     #     # Process payment logic here
@@ -247,7 +229,7 @@ def payment():
     elif ticket_category == 'CAT5':
         price = 325000.00 if showing == 'matinee' else 350000.00
 
-    return render_template('payment.html', first_name=ticketDetails['first_name'], ticket_category=ticket_category, showing=showing, price=price, ticket_amount=ticket_amount)
+    return render_template('payment.html', first_name=retrieveDetails('first_name'), ticket_category=ticket_category, showing=showing, price=price, ticket_amount=ticket_amount)
 
 @app.route('/profile')
 @login_required
