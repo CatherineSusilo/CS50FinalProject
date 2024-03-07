@@ -165,7 +165,7 @@ def logout():
 
 
 def retrieveDetails(detail_name):
-    row = db.execute(f"SELECT {detail_name} FROM ticketDetails ORDER BY id DESC LIMIT 1")
+    row = db.execute("SELECT {} FROM ticketDetails ORDER BY id DESC LIMIT 1".format(detail_name))
     if row:
         return row[0]
     else:
@@ -193,11 +193,7 @@ def buy_tickets():
         elif not request.form.get('showing'):
             return apology("must provide showing", 400)
         # ticket_amount = int(request.form['ticket_amount'])
-        db.execute('''INSERT INTO ticketDetails (first_name, last_name, email, phone_number, birthday, ticket_amount, ticket_category, showing)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-                (request.form.get("first_name"), request.form.get("last_name"), request.form.get("email"),
-                 request.form.get("phone_number"), request.form.get("birthday"), int(request.form['ticket_amount']),
-                 request.form.get('ticket_category'), request.form.get('showing')))
+        db.execute("INSERT INTO ticketDetails (first_name, last_name, email, phone_number, birthday, ticket_amount, ticket_category, showing) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (request.form.get('first_name'), request.form.get('last_name'), request.form.get('email'), request.form.get('phone_number'), request.form.get('birthday'), int(request.form['ticket_amount']), request.form.get('ticket_category'), request.form.get('showing')))
 
         # Redirect to the seat selection page
         return redirect('/payment')
@@ -207,8 +203,6 @@ def buy_tickets():
 @app.route('/payment', methods=['GET', 'POST'])
 @login_required
 def payment():
-    if request.method == 'POST':
-        return redirect('/payment')
     ticket_category = retrieveDetails('ticket_category')
     showing = retrieveDetails('showing')
     ticket_amount = retrieveDetails('ticket_amount')
@@ -228,6 +222,9 @@ def payment():
         price = 275000.00 if showing == 'matinee' else 300000.00
     elif ticket_category == 'CAT5':
         price = 325000.00 if showing == 'matinee' else 350000.00
+    if request.method == 'POST':
+        # db.execute("")
+        return redirect('/')
 
     return render_template('payment.html', first_name=retrieveDetails('first_name'), ticket_category=ticket_category, showing=showing, price=price, ticket_amount=ticket_amount)
 
