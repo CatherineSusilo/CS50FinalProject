@@ -1,0 +1,27 @@
+Introduction
+Our project aims to create a ticketing system for Catherine’s school's musical event, inspired by platforms like loket.com. The system is designed to handle ticket sales, seat selection, and user registration, along with features for event organizers and administrators to manage the event and customer data.
+
+Technical Implementation
+Backend
+Flask Framework: We chose Flask due to its simplicity and flexibility in building web applications. Its lightweight nature and extensive documentation made it suitable for our project.
+SQLite Database: SQLite was used for its ease of setup and integration with Flask. It provided a lightweight solution for managing user and event data.
+Session Management: We utilized Flask's session management to store temporary user data across multiple requests, such as selected seats and ticket details.
+
+Frontend
+HTML, CSS, JavaScript: We used these standard web technologies for building the frontend interface. HTML provided the structure, CSS for styling, and JavaScript for interactivity.
+Bootstrap Framework: Bootstrap was employed for its responsive design and pre-styled components, allowing us to quickly create a visually appealing and user-friendly interface.
+Features
+User Authentication: Implemented user authentication using Flask-Login to ensure secure access to the system's features.
+Ticket Sales: Customers can purchase tickets through the platform.
+Event Management: Organizers and administrators have access to more pages relating to managing the event.
+User Profile: Customers can create accounts and view their profile information.
+Sales Summary: A summary of ticket sales is provided to give organizers insights into event attendance and revenue generation, though functionality was not implemented yet.
+
+Design Decisions
+Modularity: We aimed for a modular design, with distinct components responsible for specific functionalities, such as user authentication, event management, and ticket sales.
+User Experience: User experience was a primary consideration, leading to the development of intuitive interfaces for both customers and administrators.
+Data Security: Measures were taken to ensure the security of user data, such as password hashing for authentication and proper validation of user inputs to prevent SQL injection attacks.
+Flexibility: The system was designed to be flexible, accommodating various event types and configurations, such as different ticket categories and showings.
+
+Conclusion
+Despite the project being incomplete due to time constraints, we believe that the design decisions made and the technologies chosen laid a solid foundation for the ticketing system. With further development and refinement, the system could become a valuable tool for managing events and ticket sales efficiently.
