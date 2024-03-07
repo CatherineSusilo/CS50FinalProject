@@ -1,1 +1,32 @@
+Ticket Booking System
+Introduction
+Welcome to our Ticket Booking System! This system is designed to provide a user-friendly platform for customers to purchase tickets for various events, as well as for employees to manage the database of ticket purchases. This README serves as a user's manual to guide you through the functionalities of the system. Several functionalities have not been implemented yet due to the packed schedule of our collaborators.
 
+Collaborators, email, TF:
+1. Catherine Susilo, catherinesusilo7@gmail.com, Haley Mosdell 
+2. Zoe Hidayat, zoehidayat.28@gmail.com,  Athena Braun
+
+Features
+Customer Interface: Customers can easily navigate through the website to view available events, select seats, and purchase tickets.
+Committee Dashboard: committee have access to a dashboard where they can view, manage, and analyze ticket sales data.
+Database Management: The system stores ticket purchase data in a database, allowing for easy retrieval and management.
+Setup
+To set up and run the Ticket Booking System on your local machine, follow these steps:
+1. download the zip file
+2. Go to the CS50 github and paste the following commands into the terminal:  unzip CS50FinalProject
+3. then type this: rm CS50FinalProject
+and respond with “y” followed by Enter at the prompt to remove the ZIP file you downloaded.
+4. then type this: cd CS50FinalProject
+5. finally type: flask run
+
+Usage
+The software is made with HTML, CSS, Python, SQL. It begins in the login page for users and the option to register. Registering will upload the user's data into the ticketing.db SQL database.
+
+There is a premade username to access the core member feature which is the admin of this program. 
+Username: Core Member
+Password: admin
+and
+Username: Committee Member
+Password: committee
+
+These 2 positions can not be made within the website itself as this should come from a pre-made database with existing users to give greater protection and privacy. Customers can have their own account with the customer position.
